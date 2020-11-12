@@ -1,14 +1,11 @@
 from tkinter import Tk, Text, Button, END, re
-
 class Interfaz:
     def __init__(self, ventana):
         self.ventana=ventana
         self.ventana.title("Calculadora")
         self.pantalla=Text(self.ventana, state="disabled", width=40, height=3, background="black", foreground="gray", font=("Helvetica",15))
         self.pantalla.grid(row=0, column=0, columnspan=4, padx=5, pady=5)
-
         self.operacion=""
-
         boton1=self.crearBoton(7)
         boton2=self.crearBoton(8)
         boton3=self.crearBoton(9)
@@ -26,7 +23,6 @@ class Interfaz:
         boton15=self.crearBoton("+")
         boton16=self.crearBoton("-")
         boton17=self.crearBoton("=",escribir=False,ancho=20,alto=2)
-
         botones=[
                 boton1,
                 boton2,
@@ -51,12 +47,9 @@ class Interfaz:
                 botones[contador].grid(row=fila,column=columna)
                 contador+=1
         botones[16].grid(row=5,column=0,columnspan=4)
-        
         return
-    #
     def crearBoton(self, valor, escribir=True, ancho=9, alto=1):
         return Button(self.ventana, text=valor, width=ancho, height=alto, font=("Helvetica",15), command=lambda:self.click(valor,escribir))
-    #
     def click(self, texto, escribir):
         if not escribir:
             try: 
@@ -79,20 +72,16 @@ class Interfaz:
             self.operacion+=str(texto)
             self.mostrarEnPantalla(texto)
         return
-    #
     def limpiarPantalla(self):
         self.pantalla.configure(state="normal")
         self.pantalla.delete("1.0", END)
         self.pantalla.configure(state="disabled")
         return
-    #
     def mostrarEnPantalla(self, valor):
         self.pantalla.configure(state="normal")
         self.pantalla.insert(END, valor)
         self.pantalla.configure(state="disabled")
         return
-    #
-#
 ventana_principal=Tk()
 calculadora=Interfaz(ventana_principal)
 ventana_principal.mainloop()
